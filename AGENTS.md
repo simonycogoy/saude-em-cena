@@ -28,3 +28,7 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- Shared site chrome (header, footer, logo, nav list) lives in `src/components/site/`; pages compose it themselves so the login page can use a full-screen split layout without the header.
+- Highlight colors come from tone tokens (teal/coral/amber/sky/ink + `-soft`) in `src/styles.css`; never hardcode color classes so the palette can change in one place.

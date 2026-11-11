@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AcessoRouteImport } from './routes/acesso'
+import { Route as DocumentacaoRouteImport } from './routes/documentacao'
+import { Route as InformacoesRouteImport } from './routes/informacoes'
+import { Route as LinksRouteImport } from './routes/links'
+import { Route as NoticiasRouteImport } from './routes/noticias'
+import { Route as UnidadesRouteImport } from './routes/unidades'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AcessoRoute = AcessoRouteImport.update({
+  id: '/acesso',
+  path: '/acesso',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentacaoRoute = DocumentacaoRouteImport.update({
+  id: '/documentacao',
+  path: '/documentacao',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InformacoesRoute = InformacoesRouteImport.update({
+  id: '/informacoes',
+  path: '/informacoes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LinksRoute = LinksRouteImport.update({
+  id: '/links',
+  path: '/links',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NoticiasRoute = NoticiasRouteImport.update({
+  id: '/noticias',
+  path: '/noticias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UnidadesRoute = UnidadesRouteImport.update({
+  id: '/unidades',
+  path: '/unidades',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/acesso': typeof AcessoRoute
+  '/documentacao': typeof DocumentacaoRoute
+  '/informacoes': typeof InformacoesRoute
+  '/links': typeof LinksRoute
+  '/noticias': typeof NoticiasRoute
+  '/unidades': typeof UnidadesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/acesso': typeof AcessoRoute
+  '/documentacao': typeof DocumentacaoRoute
+  '/informacoes': typeof InformacoesRoute
+  '/links': typeof LinksRoute
+  '/noticias': typeof NoticiasRoute
+  '/unidades': typeof UnidadesRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/acesso': typeof AcessoRoute
+  '/documentacao': typeof DocumentacaoRoute
+  '/informacoes': typeof InformacoesRoute
+  '/links': typeof LinksRoute
+  '/noticias': typeof NoticiasRoute
+  '/unidades': typeof UnidadesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/acesso'
+    | '/documentacao'
+    | '/informacoes'
+    | '/links'
+    | '/noticias'
+    | '/unidades'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/acesso'
+    | '/documentacao'
+    | '/informacoes'
+    | '/links'
+    | '/noticias'
+    | '/unidades'
+  id:
+    | '__root__'
+    | '/'
+    | '/acesso'
+    | '/documentacao'
+    | '/informacoes'
+    | '/links'
+    | '/noticias'
+    | '/unidades'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AcessoRoute: typeof AcessoRoute
+  DocumentacaoRoute: typeof DocumentacaoRoute
+  InformacoesRoute: typeof InformacoesRoute
+  LinksRoute: typeof LinksRoute
+  NoticiasRoute: typeof NoticiasRoute
+  UnidadesRoute: typeof UnidadesRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/acesso': {
+      id: '/acesso'
+      path: '/acesso'
+      fullPath: '/acesso'
+      preLoaderRoute: typeof AcessoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documentacao': {
+      id: '/documentacao'
+      path: '/documentacao'
+      fullPath: '/documentacao'
+      preLoaderRoute: typeof DocumentacaoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/informacoes': {
+      id: '/informacoes'
+      path: '/informacoes'
+      fullPath: '/informacoes'
+      preLoaderRoute: typeof InformacoesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/links': {
+      id: '/links'
+      path: '/links'
+      fullPath: '/links'
+      preLoaderRoute: typeof LinksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/noticias': {
+      id: '/noticias'
+      path: '/noticias'
+      fullPath: '/noticias'
+      preLoaderRoute: typeof NoticiasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/unidades': {
+      id: '/unidades'
+      path: '/unidades'
+      fullPath: '/unidades'
+      preLoaderRoute: typeof UnidadesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AcessoRoute: AcessoRoute,
+  DocumentacaoRoute: DocumentacaoRoute,
+  InformacoesRoute: InformacoesRoute,
+  LinksRoute: LinksRoute,
+  NoticiasRoute: NoticiasRoute,
+  UnidadesRoute: UnidadesRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
