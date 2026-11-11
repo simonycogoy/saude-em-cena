@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Logo } from "@/components/site/Logo";
-import theater from "@/assets/theater-facade.jpg";
+import theaterAsset from "@/assets/theater-prezewodowski.jpg.asset.json";
 
 export const Route = createFileRoute("/acesso")({
   head: () => ({
@@ -49,11 +49,11 @@ function AcessoPage() {
       {/* Painel visual */}
       <aside className="relative hidden overflow-hidden bg-ink text-ink-foreground lg:block">
         <img
-          src={theater}
-          alt="Fachada do teatro histórico de Itaqui"
-          width={1280}
-          height={1536}
-          className="absolute inset-0 h-full w-full object-cover opacity-45 mix-blend-luminosity"
+          src={theaterAsset.url}
+          alt="Fachada do Theatro Prezewodowski, em Itaqui"
+          width={1920}
+          height={1280}
+          className="absolute inset-0 size-full object-cover object-[center_30%] opacity-50 mix-blend-luminosity"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-ink/30" />
         <div className="relative flex h-full flex-col justify-between p-12">

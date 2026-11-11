@@ -2,9 +2,10 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
   ArrowUpRight,
-  CalendarDays,
+  Clock,
   FileText,
   HeartPulse,
+  Landmark,
   Link2,
   MapPin,
   Megaphone,
@@ -18,7 +19,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
-import theater from "@/assets/theater-facade.jpg";
+import theaterAsset from "@/assets/theater-prezewodowski.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -59,6 +60,13 @@ const QUICK: { to: string; title: string; desc: string; icon: LucideIcon; tone: 
   { to: "/links", title: "Links Úteis", desc: "Canais oficiais", icon: Link2, tone: "ink" },
 ];
 
+/* Destaques que apoiam a foto e emendam o topo no resto da página */
+const SHELF: { icon: LucideIcon; tone: Tone; label: string; value: string }[] = [
+  { icon: Syringe, tone: "coral", label: "Campanha ativa", value: "Vacina da gripe · 10 a 20 de abril" },
+  { icon: MapPin, tone: "amber", label: "Rede municipal", value: "12 unidades de saúde" },
+  { icon: Clock, tone: "teal", label: "Urgência e emergência", value: "Pronto-atendimento 24h" },
+];
+
 const NEWS: { date: string; tag: string; tone: Tone; icon: LucideIcon; title: string; text: string }[] = [
   {
     date: "10/04/2026",
@@ -96,9 +104,10 @@ function Index() {
         <section className="relative overflow-hidden bg-gradient-ink text-ink-foreground">
           <div className="absolute inset-0 bg-grid-ink [mask-image:radial-gradient(ellipse_at_top_left,black,transparent_70%)]" />
           <div className="absolute -left-24 top-1/2 size-96 rounded-full bg-teal/25 blur-3xl" />
+          <div className="absolute right-0 top-8 hidden size-[26rem] rounded-full bg-amber/15 blur-3xl lg:block" />
 
-          <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 lg:grid-cols-[1.05fr_1fr] lg:px-8 lg:py-24">
-            <div className="animate-rise">
+          <div className="relative mx-auto grid max-w-7xl items-stretch gap-10 px-5 pb-0 pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-12 lg:px-8 lg:pt-24">
+            <div className="animate-rise pb-16 lg:pb-24">
               <span className="inline-flex items-center gap-2 rounded-full bg-ink-foreground/10 px-3.5 py-1.5 text-xs font-semibold ring-1 ring-ink-foreground/20">
                 <span className="size-2 rounded-full bg-amber" />
                 Itaqui · Rio Grande do Sul
@@ -117,7 +126,7 @@ function Index() {
                 <Search className="ml-4 size-5 shrink-0 text-muted-foreground" />
                 <input
                   type="search"
-                  placeholder="Buscar unidade, vacina ou serviço…"
+                  placeholder="Buscar serviço ou unidade…"
                   className="h-11 w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
                 />
                 <Button type="submit" variant="coral" className="shrink-0">
@@ -138,48 +147,49 @@ function Index() {
               </div>
             </div>
 
-            {/* Foto do teatro */}
-            <div className="relative animate-rise [animation-delay:150ms]">
-              <div className="relative overflow-hidden rounded-[2rem] ring-1 ring-ink-foreground/15 shadow-lift">
+            {/* Foto do teatro: base apoiada na borda da seção, topo dissolvendo no fundo */}
+            <figure className="relative m-0 animate-rise [animation-delay:150ms] lg:mr-[min(0px,calc(38rem-50vw))]">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-t-[2rem] shadow-lift ring-1 ring-ink-foreground/15 lg:aspect-auto lg:h-full">
                 <img
-                  src={theater}
-                  alt="Fachada do teatro histórico de Itaqui"
-                  width={1280}
-                  height={1536}
-                  className="aspect-[4/4.2] w-full object-cover"
+                  src={theaterAsset.url}
+                  alt="Fachada do Theatro Prezewodowski, em Itaqui"
+                  width={1920}
+                  height={1280}
+                  className="absolute inset-0 size-full object-cover object-[center_26%]"
                 />
-                <div className="absolute inset-0 bg-gradient-photo" />
-                <p className="absolute bottom-5 left-6 text-xs font-semibold uppercase tracking-[0.16em] text-ink-foreground/90">
+                <div className="absolute inset-x-0 top-0 h-2/5 bg-gradient-to-b from-ink via-ink/55 to-transparent" />
+                <div className="absolute inset-y-0 left-0 w-28 bg-gradient-to-r from-ink via-ink/70 to-transparent" />
+                <figcaption className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-full bg-ink/70 px-4 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-ink-foreground/90 ring-1 ring-ink-foreground/20 backdrop-blur-sm lg:right-6 lg:top-6">
+                  <Landmark className="size-3.5 text-amber" />
                   Theatro Prezewodowski
-                </p>
+                </figcaption>
               </div>
-
-              {/* Cartões flutuantes */}
-              <div className="absolute -left-4 top-8 hidden w-60 rounded-2xl bg-card p-4 text-card-foreground shadow-lift sm:block lg:-left-10">
-                <div className="flex items-center gap-3">
-                  <span className="grid size-10 place-items-center rounded-xl bg-coral-soft text-coral">
-                    <Syringe className="size-5" />
-                  </span>
-                  <div>
-                    <p className="text-xs font-semibold text-coral">Campanha ativa</p>
-                    <p className="text-sm font-bold">Vacina da gripe</p>
-                  </div>
-                </div>
-                <p className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
-                  <CalendarDays className="size-3.5" /> 10 a 20 de abril
-                </p>
-              </div>
-
-              <div className="absolute -bottom-6 right-4 hidden rounded-2xl bg-amber px-5 py-4 text-amber-foreground shadow-lift sm:block lg:-right-6">
-                <p className="font-display text-3xl font-extrabold leading-none">12</p>
-                <p className="mt-1 text-xs font-bold">unidades de saúde</p>
-              </div>
-            </div>
+            </figure>
           </div>
         </section>
 
+        {/* Prateleira de destaques: barra única que apoia a foto e emenda o topo na página */}
+        <div className="relative z-10 mx-auto -mt-12 max-w-7xl px-5 lg:mr-[min(0px,calc(38rem-50vw))] lg:px-8">
+          <div className="grid gap-px overflow-hidden rounded-2xl border border-border bg-border shadow-lift sm:grid-cols-3">
+            {SHELF.map((s) => {
+              const t = TONE[s.tone];
+              return (
+                <div key={s.label} className="flex items-center gap-4 bg-card p-5">
+                  <span className={`grid size-12 shrink-0 place-items-center rounded-xl ${t.soft} ${t.text}`}>
+                    <s.icon className="size-6" />
+                  </span>
+                  <div className="min-w-0">
+                    <p className="eyebrow text-muted-foreground">{s.label}</p>
+                    <p className="mt-1 text-sm font-bold leading-snug">{s.value}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
         {/* ACESSOS RÁPIDOS */}
-        <section className="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+        <section className="mx-auto max-w-7xl px-5 pb-20 pt-16 lg:px-8">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
               <p className="eyebrow text-teal">Acessos rápidos</p>
